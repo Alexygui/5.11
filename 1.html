@@ -4,7 +4,28 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<link rel="stylesheet" href="css/default.css" />
-		<link rel="stylesheet" href="css/skin_0.css" />
+		<link rel="stylesheet" href="css/skin_0.css" id="cssfile"/>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+		<script type="text/javascript" src="js/jquery.cookie.js" ></script>
+		<script>
+			$(function(){
+				var $li = $('#skin>li');
+				$li.click(function(){
+					$(this).addClass('selected')
+						.siblings().removeClass('selected');
+					$('#cssfile').attr('href','css/'+ this.id +'.css');
+					$.cookie('myCssSkin', this.id, {path: '/', expires: 10});
+				});
+				var $cookie_skin = $.cookie('myCssSkin');
+				if($cookie_skin){
+					$("#"+$cookie_skin).addClass('selected')
+									.siblings().removeClass('selected');
+					$('#cssfile').attr('href','css/'+$cookie_skin+'.css');
+					$.cookie('myCssSkin',$cookie_skin,{path:'/',expires:10});
+				}
+				
+			});
+		</script>
 		
 	</head>
 	<body>
